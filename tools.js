@@ -14,6 +14,18 @@
 
 const TOOLS = [
   {
+    id: "coding-agent",
+    name: "Coding Agent",
+    tagline: "Free AI coding assistant",
+    description: "Free AI coding assistant. Write, explain, fix and optimize code, plus a JavaScript playground, JSON formatter, regex tester and more developer utilities.",
+    url: "https://hiat01.github.io/coding-agent/",
+    category: "AI",
+    icon: "💻",
+    date: "2026-11-26",
+    badge: "NEW",
+    features: ["Write & explain code", "Fix & debug code", "Code playground", "JSON formatter", "Regex tester", "Snippet library"]
+  },
+  {
     id: "ai-agent",
     name: "AI Agent",
     tagline: "Free AI chat tool",
@@ -22,7 +34,7 @@ const TOOLS = [
     category: "AI",
     icon: "🤖",
     date: "2026-11-26",
-    badge: "NEW",
+    badge: "",
     features: ["Write Facebook posts", "Summarize text", "Translate Myanmar-English", "Generate captions"]
   },
   {
