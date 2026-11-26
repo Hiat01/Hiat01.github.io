@@ -14,6 +14,18 @@
 
 const TOOLS = [
   {
+    id: "movie-recap",
+    name: "Movie Recap",
+    tagline: "Free AI movie recap generator",
+    description: "Free AI movie recap generator in English, Myanmar and Chinese. Write recap scripts, break down scenes with timecodes, get title and hook ideas.",
+    url: "https://hiat01.github.io/movie-recap/",
+    category: "Movie",
+    icon: "🎥",
+    date: "2026-11-26",
+    badge: "NEW",
+    features: ["AI recap scripts", "English / Myanmar / Chinese", "Scene breakdown", "Title & hook ideas", "Character list"]
+  },
+  {
     id: "coding-agent",
     name: "Coding Agent",
     tagline: "Free AI coding assistant",
@@ -22,7 +34,7 @@ const TOOLS = [
     category: "AI",
     icon: "💻",
     date: "2026-11-26",
-    badge: "NEW",
+    badge: "",
     features: ["Write & explain code", "Fix & debug code", "Code playground", "JSON formatter", "Regex tester", "Snippet library"]
   },
   {
