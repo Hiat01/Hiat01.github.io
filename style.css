@@ -154,6 +154,10 @@ a { color: var(--blue); }
 footer { background: #111827; color: #d1d5db; padding: 28px 0 36px; }
 .footer-inner p { margin: 6px 0; }
 footer a { color: #fff; }
+.footer-social { display: flex; gap: 14px; align-items: center; }
+.footer-social a { color: #9ca3af; display: inline-flex; line-height: 0; }
+.footer-social a:hover { color: #fff; }
+.footer-social svg { width: 22px; height: 22px; }
 
 /* Corner menu — fixed top-right, always visible */
 .menu-btn {
