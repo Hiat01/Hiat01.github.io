@@ -14,6 +14,18 @@
 
 const TOOLS = [
   {
+    id: "multi-ai",
+    name: "Multi-AI",
+    tagline: "Ask several AIs at once",
+    description: "Ask several AIs at once and get one best answer. Connect your own API keys, compare answers side by side, let an AI judge merge the best parts.",
+    url: "https://hiat01.github.io/multi-ai/",
+    category: "AI",
+    icon: "🧠",
+    date: "2026-11-26",
+    badge: "NEW",
+    features: ["Ask all AIs at once", "Compare answers", "AI judge best answer", "OpenRouter & FreeModel presets"]
+  },
+  {
     id: "movie-recap",
     name: "Movie Recap",
     tagline: "Free AI movie recap generator",
@@ -22,7 +34,7 @@ const TOOLS = [
     category: "Movie",
     icon: "🎥",
     date: "2026-11-26",
-    badge: "NEW",
+    badge: "",
     features: ["AI recap scripts", "English / Myanmar / Chinese", "Scene breakdown", "Title & hook ideas", "Character list"]
   },
   {
