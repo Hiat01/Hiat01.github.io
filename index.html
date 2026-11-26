@@ -18,6 +18,24 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<button class="menu-btn" id="menuBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menuPanel">☰ Menu<span class="menu-dot" id="menuDot" aria-hidden="true"></span></button>
+<div class="menu-panel" id="menuPanel" role="menu" aria-label="Site menu" hidden>
+  <p class="menu-title">Menu</p>
+  <button type="button" class="menu-item" id="darkModeItem" role="menuitemcheckbox" aria-checked="false"><span>🌙 Dark Mode</span><span class="menu-state" id="darkModeState">Off</span></button>
+  <button type="button" class="menu-item" id="textSizeItem" role="menuitemcheckbox" aria-checked="false"><span>Aa Text Size</span><span class="menu-state" id="textSizeState">Normal</span></button>
+  <button type="button" class="menu-item" id="compactItem" role="menuitemcheckbox" aria-checked="false"><span>▦ Compact View</span><span class="menu-state" id="compactState">Off</span></button>
+  <button type="button" class="menu-item" id="shareMenuItem" role="menuitem"><span>🔗 Share this site</span><span class="menu-state" id="shareMenuState"></span></button>
+  <button type="button" class="menu-item" id="allToolsItem" role="menuitem"><span>🧰 All Tools</span></button>
+  <button type="button" class="menu-item" id="aboutItem" role="menuitem"><span>ℹ️ About</span></button>
+</div>
+<div class="dialog-overlay" id="aboutOverlay" hidden>
+  <div class="about-dialog" role="dialog" aria-modal="true" aria-labelledby="aboutDialogTitle">
+    <h2 id="aboutDialogTitle">About Free Tools</h2>
+    <p>Free Tools is a collection of free online tools — AI, image, video and coding tools. No account, no login, no payment, no server.</p>
+    <p>Your files and chats stay on your device. Tools that use an AI API only send text to the API provider you choose.</p>
+    <button type="button" class="btn btn-primary" id="aboutCloseBtn">Close</button>
+  </div>
+</div>
 <header class="topbar">
   <div class="container topbar-inner">
     <a class="brand" href="#">Free Tools</a>

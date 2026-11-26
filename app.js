@@ -12,6 +12,148 @@
 
   var state = { query: "", category: "All" };
 
+  // ---- Corner menu preferences (saved in localStorage) ----
+  var PREF_THEME = "ft-theme";       // "dark" | "light"
+  var PREF_TEXT = "ft-text-size";    // "large" | "normal"
+  var PREF_COMPACT = "ft-compact";   // "1" | "0"
+  var HUB_LINK = "https://hiat01.github.io/";
+
+  function loadPref(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+  function savePref(key, value) { try { localStorage.setItem(key, value); } catch (e) { /* storage unavailable */ } }
+
+  // Apply saved choices right away (no flash). First visit: follow the device's dark preference.
+  function applyPrefs() {
+    var savedTheme = loadPref(PREF_THEME);
+    var dark = savedTheme
+      ? savedTheme === "dark"
+      : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+    document.documentElement.classList.toggle("text-large", loadPref(PREF_TEXT) === "large");
+    document.documentElement.classList.toggle("compact-view", loadPref(PREF_COMPACT) === "1");
+    return dark;
+  }
+  applyPrefs();
+
+  function copyText(text, onOk, onFail) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onOk, onFail);
+    } else {
+      onFail();
+    }
+  }
+
+  function initMenu() {
+    var menuBtn = el("menuBtn");
+    var panel = el("menuPanel");
+    var overlay = el("aboutOverlay");
+    if (!menuBtn || !panel) return;
+
+    function isDark() { return document.documentElement.getAttribute("data-theme") === "dark"; }
+
+    function syncMenuStates() {
+      var darkItem = el("darkModeItem");
+      var darkState = el("darkModeState");
+      if (darkItem) darkItem.setAttribute("aria-checked", isDark() ? "true" : "false");
+      if (darkState) darkState.textContent = isDark() ? "On" : "Off";
+      menuBtn.classList.toggle("dark-on", isDark());
+      var textItem = el("textSizeItem");
+      var textState = el("textSizeState");
+      var large = document.documentElement.classList.contains("text-large");
+      if (textItem) textItem.setAttribute("aria-checked", large ? "true" : "false");
+      if (textState) textState.textContent = large ? "Large" : "Normal";
+      var compactItem = el("compactItem");
+      var compactState = el("compactState");
+      var compact = document.documentElement.classList.contains("compact-view");
+      if (compactItem) compactItem.setAttribute("aria-checked", compact ? "true" : "false");
+      if (compactState) compactState.textContent = compact ? "On" : "Off";
+    }
+
+    function openMenu() {
+      panel.hidden = false;
+      menuBtn.setAttribute("aria-expanded", "true");
+    }
+    function closeMenu() {
+      panel.hidden = true;
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+    function toggleMenu() {
+      if (panel.hidden) { openMenu(); } else { closeMenu(); }
+    }
+    function openAbout() {
+      if (overlay) overlay.hidden = false;
+    }
+    function closeAbout() {
+      if (overlay) overlay.hidden = true;
+    }
+
+    menuBtn.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      toggleMenu();
+    });
+    panel.addEventListener("click", function (ev) { ev.stopPropagation(); });
+
+    var darkItem = el("darkModeItem");
+    if (darkItem) darkItem.addEventListener("click", function () {
+      var dark = !isDark();
+      document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+      savePref(PREF_THEME, dark ? "dark" : "light");
+      syncMenuStates();
+    });
+    var textItem = el("textSizeItem");
+    if (textItem) textItem.addEventListener("click", function () {
+      var large = !document.documentElement.classList.contains("text-large");
+      document.documentElement.classList.toggle("text-large", large);
+      savePref(PREF_TEXT, large ? "large" : "normal");
+      syncMenuStates();
+    });
+    var compactItem = el("compactItem");
+    if (compactItem) compactItem.addEventListener("click", function () {
+      var compact = !document.documentElement.classList.contains("compact-view");
+      document.documentElement.classList.toggle("compact-view", compact);
+      savePref(PREF_COMPACT, compact ? "1" : "0");
+      syncMenuStates();
+    });
+    var shareItem = el("shareMenuItem");
+    if (shareItem) shareItem.addEventListener("click", function () {
+      var stateEl = el("shareMenuState");
+      function done(msg) {
+        if (stateEl) stateEl.textContent = msg;
+        setTimeout(function () { if (stateEl) stateEl.textContent = ""; closeMenu(); }, 1200);
+      }
+      copyText(HUB_LINK, function () { done("Link copied"); }, function () { done("Copy: " + HUB_LINK); });
+    });
+    var allToolsItem = el("allToolsItem");
+    if (allToolsItem) allToolsItem.addEventListener("click", function () {
+      closeMenu();
+      var toolsSection = el("tools");
+      if (toolsSection) toolsSection.scrollIntoView({ behavior: "smooth" });
+    });
+    var aboutItem = el("aboutItem");
+    if (aboutItem) aboutItem.addEventListener("click", function () {
+      closeMenu();
+      openAbout();
+    });
+    var aboutClose = el("aboutCloseBtn");
+    if (aboutClose) aboutClose.addEventListener("click", closeAbout);
+    if (overlay) overlay.addEventListener("click", function (ev) {
+      if (ev.target === overlay) closeAbout();
+    });
+
+    document.addEventListener("click", function (ev) {
+      if (!panel.hidden && !panel.contains(ev.target) && ev.target !== menuBtn && !menuBtn.contains(ev.target)) {
+        closeMenu();
+      }
+    });
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") {
+        closeMenu();
+        closeAbout();
+      }
+    });
+
+    syncMenuStates();
+  }
+
   function el(id) { return document.getElementById(id); }
 
   function formatDate(iso) {
@@ -165,6 +307,7 @@
     renderFilters();
     renderGrid();
     syncNav();
+    initMenu();
   }
 
   if (document.readyState === "loading") {
