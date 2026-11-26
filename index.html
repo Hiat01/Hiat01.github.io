@@ -22,6 +22,11 @@
 <button class="menu-btn" id="menuBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menuPanel">☰ Menu<span class="menu-dot" id="menuDot" aria-hidden="true"></span></button>
 <div class="menu-panel" id="menuPanel" role="menu" aria-label="Site menu" hidden>
   <p class="menu-title">Menu</p>
+  <div class="menu-tools" id="menuToolsWrap">
+    <button type="button" class="menu-tools-toggle" id="menuToolsToggle" aria-expanded="false" aria-controls="menuToolsList"><span>🧰 Tools</span><span class="menu-tools-arrow" id="menuToolsArrow" aria-hidden="true">▸</span></button>
+    <div id="menuToolsList" aria-label="Tools by category" hidden></div>
+  </div>
+  <hr class="menu-divider">
   <button type="button" class="menu-item" id="darkModeItem" role="menuitemcheckbox" aria-checked="false"><span>🌙 Dark Mode</span><span class="menu-state" id="darkModeState">Off</span></button>
   <button type="button" class="menu-item" id="textSizeItem" role="menuitemcheckbox" aria-checked="false"><span>Aa Text Size</span><span class="menu-state" id="textSizeState">Normal</span></button>
   <button type="button" class="menu-item" id="compactItem" role="menuitemcheckbox" aria-checked="false"><span>▦ Compact View</span><span class="menu-state" id="compactState">Off</span></button>

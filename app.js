@@ -75,6 +75,23 @@
     function closeMenu() {
       panel.hidden = true;
       menuBtn.setAttribute("aria-expanded", "false");
+      setToolsOpen(false); // menu stays compact next time it opens
+    }
+    // Collapsible Tools section: collapsed by default, tap "Tools" to expand.
+    function setToolsOpen(open) {
+      var wrap = el("menuToolsWrap");
+      var list = el("menuToolsList");
+      var toggle = el("menuToolsToggle");
+      var arrow = el("menuToolsArrow");
+      if (!wrap || !list || !toggle) return;
+      list.hidden = !open;
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      wrap.classList.toggle("open", open);
+      if (arrow) arrow.textContent = open ? "▾" : "▸";
+    }
+    function toggleTools() {
+      var list = el("menuToolsList");
+      if (list) setToolsOpen(list.hidden);
     }
     function toggleMenu() {
       if (panel.hidden) { openMenu(); } else { closeMenu(); }
@@ -91,6 +108,11 @@
       toggleMenu();
     });
     panel.addEventListener("click", function (ev) { ev.stopPropagation(); });
+
+    var toolsToggle = el("menuToolsToggle");
+    if (toolsToggle) toolsToggle.addEventListener("click", function () {
+      toggleTools();
+    });
 
     var darkItem = el("darkModeItem");
     if (darkItem) darkItem.addEventListener("click", function () {
@@ -152,6 +174,31 @@
     });
 
     syncMenuStates();
+  }
+
+  // ---- Corner menu: Tools grouped by category, rendered from TOOLS ----
+  // A new tool in tools.js appears here automatically, under its own
+  // category; a brand-new category gets its own group heading.
+  function renderMenuTools() {
+    var wrap = el("menuToolsList");
+    if (!wrap) return;
+    var order = [];
+    var groups = {};
+    tools.forEach(function (t) {
+      var cat = t.category || "Other";
+      if (!groups[cat]) { groups[cat] = []; order.push(cat); }
+      groups[cat].push(t);
+    });
+    wrap.innerHTML = order.map(function (cat) {
+      var links = groups[cat].map(function (t) {
+        return '<a class="menu-tool" href="' + escapeHtml(t.url) + '">' +
+          '<span class="menu-tool-icon" aria-hidden="true">' + escapeHtml(t.icon || "🧰") + "</span>" +
+          '<span class="menu-tool-name">' + escapeHtml(t.name) + "</span>" +
+          (t.badge ? '<span class="menu-tool-badge">' + escapeHtml(t.badge) + "</span>" : "") +
+          "</a>";
+      }).join("");
+      return '<p class="menu-group">' + escapeHtml(cat) + "</p>" + links;
+    }).join("");
   }
 
   function el(id) { return document.getElementById(id); }
@@ -307,6 +354,7 @@
     renderFilters();
     renderGrid();
     syncNav();
+    renderMenuTools();
     initMenu();
   }
 

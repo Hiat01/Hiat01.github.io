@@ -173,9 +173,39 @@ footer a { color: #fff; }
 .menu-panel {
   position: fixed; top: 56px; right: 12px; z-index: 1000;
   width: 260px; max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 68px); overflow-y: auto;
   background: var(--menu-panel-bg); color: var(--ink);
   border: 1px solid var(--line); border-radius: 12px;
   box-shadow: 0 8px 28px rgba(0,0,0,0.22); padding: 8px;
+}
+.menu-tools-toggle {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  width: 100%; text-align: left; background: none; border: none; border-radius: 8px;
+  padding: 10px 12px; font-size: 15px; font-weight: 700; color: var(--ink); cursor: pointer;
+}
+.menu-tools-toggle:hover { background: var(--menu-hover); }
+.menu-tools-arrow {
+  font-size: 14px; color: var(--muted);
+  display: inline-block; transition: transform 0.15s ease;
+}
+.menu-tools.open .menu-tools-arrow { transform: rotate(90deg); }
+.menu-divider { border: none; border-top: 1px solid var(--line); margin: 8px 4px; }
+.menu-group {
+  margin: 10px 10px 2px; font-size: 12px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+}
+.menu-tools .menu-group:first-child { margin-top: 2px; }
+.menu-tool {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; border-radius: 8px;
+  color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 600;
+}
+.menu-tool:hover { background: var(--menu-hover); }
+.menu-tool-icon { font-size: 18px; line-height: 1; }
+.menu-tool-name { flex: 1; }
+.menu-tool-badge {
+  background: var(--red); color: #fff; font-size: 10px; font-weight: 800;
+  letter-spacing: 0.06em; padding: 2px 7px; border-radius: 999px;
 }
 .menu-title { margin: 4px 10px 8px; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
 .menu-item {
