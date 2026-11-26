@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Tools — Free AI, Image &amp; Video Tools</title>
+<meta name="description" content="Free Tools — free AI, image and video tools. No login, no payment, no server. Open a tool and start using it right away.">
+<meta name="keywords" content="free tools, AI agent, free AI chat, image editor, video trimmer, free online tools, Hiat01">
+<meta name="author" content="Hiat01">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Tools — Free AI, Image &amp; Video Tools">
+<meta property="og:description" content="Free AI, image and video tools. No login, no payment, no server.">
+<meta property="og:url" content="https://hiat01.github.io/hub-website/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Tools — Free AI, Image &amp; Video Tools">
+<meta name="twitter:description" content="Free AI, image and video tools. No login, no payment, no server.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="#">Free Tools</a>
+    <p class="date" id="today"></p>
+    <button class="btn btn-light btn-small" id="shareBtn" type="button">Share</button>
+  </div>
+  <nav class="nav" aria-label="Categories">
+    <div class="container nav-inner">
+      <a href="#" data-nav-category="All" class="active">Home</a>
+      <a href="#tools" data-nav-category="All">All Tools</a>
+      <a href="#tools" data-nav-category="AI">AI</a>
+      <a href="#tools" data-nav-category="Image">Image</a>
+      <a href="#tools" data-nav-category="Video">Video</a>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="hero" id="hero" aria-live="polite">
+    <p>Loading tools…</p>
+  </section>
+
+  <section class="toolbar" id="tools" aria-label="Find a tool">
+    <div class="toolbar-head">
+      <h2>Latest Tools</h2>
+      <p class="count" id="resultCount"></p>
+    </div>
+    <label class="search-label" for="searchBox">Search tools</label>
+    <input type="search" id="searchBox" placeholder="Search by name, e.g. image, video, AI…" autocomplete="off">
+    <div class="filters" id="categoryFilters" role="group" aria-label="Filter by category"></div>
+  </section>
+
+  <section class="grid" id="toolGrid" aria-live="polite"></section>
+  <p class="no-results" id="noResults" hidden>No tools match your search. Try a different word or category.</p>
+
+  <section class="about">
+    <h2>Why these tools?</h2>
+    <p>Every tool on this page is free, works in your browser, and needs no account. Your files stay on your device — there is no server to upload to. New tools are added here first, so bookmark this page and check back.</p>
+    <p><strong>How to use:</strong> pick a tool below, open it, and start right away. No install, no sign-up.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p><strong>Free Tools</strong> — free tools, no login, no payment.</p>
+    <p>Privacy: your files and chats stay on your device. Tools that use an AI API only send text to the API provider you choose.</p>
+    <p><a href="https://github.com/Hiat01" target="_blank" rel="noopener">GitHub: Hiat01</a></p>
+  </div>
+</footer>
+
+<script src="tools.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
